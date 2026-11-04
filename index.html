@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function () {
+        try {
+          var currentFetch = window.fetch ? window.fetch.bind(window) : undefined;
+          var winDesc = Object.getOwnPropertyDescriptor(window, 'fetch');
+          if (winDesc && winDesc.configurable && !winDesc.writable && !winDesc.set) {
+            Object.defineProperty(window, 'fetch', {
+              configurable: true,
+              enumerable: true,
+              get: function () {
+                return currentFetch;
+              },
+              set: function (val) {
+                currentFetch = val;
+              }
+            });
+          }
+          var protoDesc = typeof Window !== 'undefined' && Window.prototype
+            ? Object.getOwnPropertyDescriptor(Window.prototype, 'fetch')
+            : undefined;
+          if (protoDesc && protoDesc.configurable && !protoDesc.writable && !protoDesc.set) {
+            Object.defineProperty(Window.prototype, 'fetch', {
+              configurable: true,
+              enumerable: true,
+              get: function () {
+                return currentFetch;
+              },
+              set: function (val) {
+                currentFetch = val;
+              }
+            });
+          }
+        } catch (_e) {}
+
+        window.addEventListener(
+          'error',
+          function (event) {
+            if (
+              (event.filename && event.filename.indexOf('chrome-extension://') === 0) ||
+              (event.message && event.message.indexOf('Cannot set property fetch of #<Window>') !== -1)
+            ) {
+              event.stopImmediatePropagation();
+              event.preventDefault();
+            }
+          },
+          true
+        );
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
+    <title>LexiCore - Spaced Repetition Vocabulary</title>
+    <meta name="description" content="Intelligent, local-first vocabulary learning PWA with AI generation, FSRS spaced repetition, adaptive active recall, and high-frequency chunks." />
+    <meta property="og:title" content="LexiCore - Spaced Repetition Vocabulary" />
+    <meta property="og:description" content="Intelligent, local-first vocabulary learning PWA with AI generation, FSRS spaced repetition, adaptive active recall, and high-frequency chunks." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#0f172a" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="LexiCore" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

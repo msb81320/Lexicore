@@ -1,0 +1,6 @@
+{
+  "name": "LexiCore - Spaced Repetition Vocabulary",
+  "description": "Intelligent, local-first vocabulary learning PWA with AI generation, FSRS spaced repetition, adaptive active recall, and high-frequency chunks.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

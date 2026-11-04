@@ -1,0 +1,6 @@
+{
+  "summary":  "Implementation plan for adding configurable JSON vocabulary/backup export in StatisticsView and a synchronized daily review reminder system (browser notifications + in-app reminder banner) with time pickers in both HomeDashboard and StatisticsView.",
+  "updatedAt":  "2026-11-02T11:20:46.533725053Z",
+  "requestFeedback":  true,
+  "userFacing":  true
+}
